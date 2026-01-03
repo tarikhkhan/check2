@@ -4,6 +4,119 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ask Her Out</title>
+    <style>
+#petalContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Petal style */
+  .petal {
+    position: absolute;
+    top: -10vh;
+    background: pink;
+    width: 14px;
+    height: 18px;
+    border-radius: 50% 50% 50% 50%;
+    opacity: 0.8;
+    animation: fall 10s linear infinite;
+  }
+
+  @keyframes fall {
+    0% {
+      transform: translateY(0) rotate(0deg);
+    }
+    100% {
+      transform: translateY(110vh) rotate(360deg);
+    }
+  }
+
+  .content {
+    position: relative;
+    z-index: 2;
+    max-width: 90%;
+    margin: 60px auto;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  h1 {
+    color: #b30059;
+    margin-bottom: 10px;
+  }
+
+  button {
+    margin-top: 25px;
+    padding: 12px 24px;
+    font-size: 16px;
+    background: linear-gradient(45deg, #ff69b4, #ff85c1);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+  }
+
+  /* Popup */
+  .popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+
+  .popup-content {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    width: 80%;
+    max-width: 300px;
+  }
+
+  .popup-content p {
+    color: #5a1033;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+
+  .popup-content button {
+    background: linear-gradient(45deg, #ff69b4, #ff85c1);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+  }
+
+  @media (max-width: 600px) {
+    .content {
+      font-size: 15px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Petals layer -->
+<div id="petalContainer"></div>
 
     <link rel="stylesheet" href="./style.css" />
   </head>
@@ -26,12 +139,42 @@
         src="https://tenor.com/embed.js"
       ></script>
       <h1>Do you love me? 🤗</h1>
-      <p>Pratham tera hi hai</p>
+      <p>I am yours...</p>
 
       <div class="btn">
         <a href="yes.html">Yes</a>
         <a href="no1.html">No</a>
       </div>
     </div>
+    <script>
+  // Petals generator
+  const container = document.getElementById('petalContainer');
+  const numPetals = 35;
+
+  for (let i = 0; i < numPetals; i++) {
+    const petal = document.createElement('div');
+    petal.classList.add('petal');
+    petal.style.left = Math.random() * 100 + 'vw';
+    petal.style.animationDuration = (8 + Math.random() * 5) + 's';
+    petal.style.animationDelay = Math.random() * 5 + 's';
+    petal.style.opacity = 0.5 + Math.random() * 0.5;
+    petal.style.background = `hsl(${330 + Math.random()*20}, 100%, ${80 + Math.random()*10}%)`;
+    container.appendChild(petal);
+  }
+
+  // Popup logic
+  const askBtn = document.getElementById('askBtn');
+  const popup = document.getElementById('popup');
+  const okBtn = document.getElementById('okBtn');
+
+  askBtn.addEventListener('click', () => {
+    popup.style.display = 'flex';
+  });
+
+  okBtn.addEventListener('click', () => {
+    popup.style.display = 'none';
+  });
+</script>
   </body>
+
 </html>
